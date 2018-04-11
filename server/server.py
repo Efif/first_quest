@@ -13,11 +13,16 @@ import tornado.websocket
 import tornado.escape
 import tornado.options
 from tornado.options import define, options
+from pymongo import MongoClient
 
 define("port", default=8000, type=int)
+define("db_ip", default="127.0.0.1")
+define("db_port", default=27017, type=int)
 
 class LoginHandler(tornado.websocket.WebSocketHandler):
 	def __init__(self, *args, **kwargs):
+		self.db_client = MongoClient(options.db_ip, options.db_port)
+		self.db = self.db_client["db_first_quest"]
 		super(LoginHandler, self).__init__(*args, **kwargs)
 
 	def open(self, *args, **kwargs):
@@ -25,6 +30,8 @@ class LoginHandler(tornado.websocket.WebSocketHandler):
 
 	def on_message(self, message):
 		message = json.loads(message)
+		tbl = self.db["tbl_account"]
+		record = tbl.find_one({ "user_id": "test" })
 		if message["user_id"] == "test" and message["password"] == "password":
 			self.write_message({ "result": True, "key": str(uuid.uuid4()) });
 		else:
