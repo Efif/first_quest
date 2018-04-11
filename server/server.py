@@ -4,6 +4,8 @@
 import os
 import json
 import logging
+import time
+import threading
 import tornado.ioloop
 import tornado.web
 import tornado.websocket
@@ -11,19 +13,43 @@ import tornado.escape
 import tornado.options
 from tornado.options import define, options
 
-define("port", default=80, type=int)
+define("port", default=8000, type=int)
 
 class TestHandler(tornado.websocket.WebSocketHandler):
-	waiters = set()
+	def __init__(self, *args, **kwargs):
+		self.waiters = set()
+		self.flg = False
+		super(TestHandler, self).__init__(*args, **kwargs)
+
+	def run(self):
+		interval = 1
+		base_time = time.time()
+		next_time = 0
+		while True:
+			for waiter in self.waiters:
+				try:
+					waiter.write_message(
+						{
+							"message": "test!!"
+						}
+					)
+				except:
+					pass
+			
+			next_time = ((base_time - time.time()) % interval) or interval
+			time.sleep(next_time)
 	
 	def open(self, *args, **kwargs):
 		self.waiters.add(self)
+		if not self.flg:
+			self.flg = True
+			tornado.ioloop.IOLoop.instance().call_later(1, self.run)
 	
 	def on_message(self, message):
 		message = json.loads(message)
 		for waiter in self.waiters:
-			if waiter == self:
-				continue
+			#if waiter == self:
+			#	continue
 			waiter.write_message(
 				{
 					"name": message["name"], 
