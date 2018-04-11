@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2017
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirstQuest", "FirstQuest.csproj", "{D0CACDB3-FF08-BE8A-F824-9AE8099FB6E5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirstQuest.Editor", "FirstQuest.Editor.csproj", "{5915DEA1-450E-682C-000B-2EE2DEF02161}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{D0CACDB3-FF08-BE8A-F824-9AE8099FB6E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D0CACDB3-FF08-BE8A-F824-9AE8099FB6E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D0CACDB3-FF08-BE8A-F824-9AE8099FB6E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5915DEA1-450E-682C-000B-2EE2DEF02161}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5915DEA1-450E-682C-000B-2EE2DEF02161}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5915DEA1-450E-682C-000B-2EE2DEF02161}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5915DEA1-450E-682C-000B-2EE2DEF02161}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
+import uuid
 import os
 import json
 import logging
@@ -14,6 +15,48 @@ import tornado.options
 from tornado.options import define, options
 
 define("port", default=8000, type=int)
+
+class LoginHandler(tornado.websocket.WebSocketHandler):
+	def __init__(self, *args, **kwargs):
+		super(LoginHandler, self).__init__(*args, **kwargs)
+
+	def open(self, *args, **kwargs):
+		pass
+
+	def on_message(self, message):
+		message = json.loads(message)
+		if message["user_id"] == "test" and message["password"] == "password":
+			self.write_message({ "result": True, "key": str(uuid.uuid4()) });
+		else:
+			self.write_message({ "result": False });
+
+	def on_close(self):
+		pass
+
+class WorldHandler(tornado.websocket.WebSocketHandler):
+	def __init__(self, *args, **kwargs):
+		self.waiters = set()
+		self.flg = False
+		super(WorldHandler, self).__init__(*args, **kwargs)
+
+	def run(self):
+		interval = 1
+		base_time = time.time()
+		next_time = 0
+		while True:
+			next_time = ((base_time - time.time()) % interval) or interval
+			time.sleep(next_time)
+	
+	def open(self, *args, **kwargs):
+		if not self.flg:
+			self.flg = True
+			tornado.ioloop.IOLoop.instance().call_later(1, self.run)
+
+	def on_message(self, message):
+		message = json.loads(message)
+
+	def on_close(self):
+		pass
 
 class TestHandler(tornado.websocket.WebSocketHandler):
 	def __init__(self, *args, **kwargs):
@@ -63,7 +106,9 @@ class TestHandler(tornado.websocket.WebSocketHandler):
 class Application(tornado.web.Application):
 	def __init__(self):
 		handlers = [
-			(r'/', TestHandler)
+			(r'/', TestHandler),
+			(r'/login', LoginHandler),
+			(r'/world', WorldHandler)
 		]
 		settings = dict(
 			cookie_secret="test",

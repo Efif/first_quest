@@ -5,8 +5,8 @@ using WebSocketSharp;
 [Serializable]
 public class TestMessage
 {
-    public string name;
-    public string message;
+    public string user_id;
+    public string password;
 }
 
 public class TestWebSocket : MonoBehaviour {
@@ -15,7 +15,7 @@ public class TestWebSocket : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        ws = new WebSocket("ws://gkf.iobb.net:8000/");
+        ws = new WebSocket("ws://gkf.iobb.net:8000/login");
 
         ws.OnOpen += (sender, e) =>
         {
@@ -45,8 +45,15 @@ public class TestWebSocket : MonoBehaviour {
         if (Input.GetKeyUp("s"))
         {
             TestMessage obj = new TestMessage();
-            obj.name = "test";
-            obj.message = "Test Message";
+            obj.user_id = "test";
+            obj.password = "hoge";
+            ws.Send(JsonUtility.ToJson(obj));
+        }
+        if (Input.GetKeyUp("a"))
+        {
+            TestMessage obj = new TestMessage();
+            obj.user_id = "test";
+            obj.password = "password";
             ws.Send(JsonUtility.ToJson(obj));
         }
 
