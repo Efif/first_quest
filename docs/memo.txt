@@ -1,9 +1,21 @@
 login-json
 　[send]
-　　user_id
-　　password
+　　user_id　　　string
+　　password　　　string
 　[receive]
-　　result
-　　key
+　　result　　　boolean
+　　key　　　string
+
+chat-json
+　[send・receive]
+　　chat_type　　　int
+　　name　　　string
+　　target　　　string
+　　message　　　string
+
+chara-json
+
+
+world-json
 
 
