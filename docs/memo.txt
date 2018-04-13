@@ -1,3 +1,31 @@
+■画面構成
+
+・タイトル画面
+　[ログインフォーム]
+　　user_id　　　文字列
+　　password　　　マスク付き文字列
+　　ログイン　　　ボタン
+　[メニュー]
+　　オプション　　　ボタン
+　　ゲーム終了　　　ボタン
+・キャラクター選択画面
+　[キャラクター選択フォーム]
+　　キャラクター一覧　　　？？？
+　　新規作成　　　ボタン
+　　削除　　　ボタン
+　[メニュー]
+　　オプション　　　ボタン
+　　ログアウト　　　ボタン
+　　ゲーム終了　　　ボタン
+・ワールド画面
+　[チャットウィンドウ]
+　[メニュー]
+　　オプション　　　ボタン
+　　キャラクター選択　　　ボタン
+　　ゲーム終了　　　ボタン
+
+■JSON仕様
+
 login-json
 　[send]
 　　user_id　　　string
@@ -7,10 +35,14 @@ login-json
 　　key　　　string
 
 chat-json
-　[send・receive]
+　[send]
+　　chat_type　　　int
+　　chara_id　　　string
+　　target_id　　　string
+　　message　　　string
+　[receive]
 　　chat_type　　　int
 　　name　　　string
-　　target　　　string
 　　message　　　string
 
 chara-json
