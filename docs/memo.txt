@@ -28,7 +28,7 @@
 
 login-json
 　[send]
-　　user_id　　　string
+　　account_id　　　string
 　　password　　　string
 　[receive]
 　　result　　　boolean
@@ -51,3 +51,18 @@ chara-json
 world-json
 
 
+■DB仕様
+
+db_first_quest
+　アカウント情報(tbl_account)
+　　ユニークキー　　　_id　　　int　PK
+　　アカウントID　　　account_id　　　string
+　　パスワード　　　password　　　string
+　　ログイン状態　　　status　　　int
+　　紐付キー　　　data_key　　　string
+
+　キャラクター情報(tbl_character)
+　　ユニークキー　　　_id　　　int　PK
+　　アカウントキー　　　account_key　　　string　※tbl_accountの_id
+　　キャラクターインデックス　　　character_index　　　int
+　　キャラクター名　　　name　　　string

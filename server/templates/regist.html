@@ -36,14 +36,14 @@
 						<table class="table table-sm">
 							<thead class="thead-inverse">
 								<tr>
-									<th>ユーザーID</th>
+									<th>アカウントID</th>
 									<th>パスワード</th>
 									<th>登録</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
-									<th><input class="form-control" type="text" value="{{ param.get("user_id", "") }}" id="user_id" name="user_id"></th>
+									<th><input class="form-control" type="text" value="{{ param.get("account_id", "") }}" id="account_id" name="account_id"></th>
 									<th><input class="form-control" type="password" value="{{ param.get("password", "") }}" id="password" name="password"></th>
 									<th><button type="submit" class="btn btn-outline-success">登録</button></th>
 								</tr>

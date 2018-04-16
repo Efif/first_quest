@@ -20,12 +20,12 @@ class LoginHandler(tornado.websocket.WebSocketHandler):
 		message = json.loads(message)
 		# TODO : サーバメンテナンス状態の取得
 		tbl = self.db["tbl_account"]
-		record = tbl.find_one({ "user_id": message["user_id"] })
-		if message["user_id"] == record.get("user_id") and message["password"] == record.get("password"):
+		record = tbl.find_one({ "account_id": message["account_id"] })
+		if message["account_id"] == record.get("account_id") and message["password"] == record.get("password"):
 			# TODO : 二重ログイン防止策の実装
-			record["data_key"] = str(uuid.uuid4())
+			record["login_key"] = str(uuid.uuid4())
 			tbl.save(record)
-			self.write_message({ "result": True, "key": record["data_key"] });
+			self.write_message({ "result": True, "key": record["login_key"] });
 		else:
 			self.write_message({ "result": False });
 

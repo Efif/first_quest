@@ -31,16 +31,54 @@
 		{% end %}
 		<div class="container-fluid">
 			<form name="main" action="/control" method="post">
-				<input type="hidden" name="user_id" value="" />
+				<input type="hidden" name="target_data" value="" />
+				<input type="hidden" name="target_id" value="" />
+				<div class="row">
+					<div class="col">
+						<h2>カウント情報テーブル(Count Table)</h2>
+					</div>
+				</div>
 				<div class="row">
 					<div class="col-12">
 						<table class="table table-sm">
 							<thead class="thead-inverse">
 								<tr>
 									<th>#</th>
-									<th>ユーザーID</th>
-									<th>パスワード</th>
-									<th>ログイン状態</th>
+									<th>Key</th>
+									<th>No</th>
+									<th>削除</th>
+								</tr>
+							</thead>
+							<tbody>
+							{% for i, data in enumerate(param["lst_count"]) %}
+								<tr>
+									<td>{{ i + 1 }}</td>
+									<td>{{ data.get("_id", "") }}</td>
+									<td>{{ data.get("seq", "") }}</td>
+									<th><button type="button" class="btn btn-outline-success" onClick="document.main.target_data.value = 'count'; document.main.target_id.value = '{{ data.get("_id", "") }}'; document.main.submit();">削除</button></th>
+								</tr>
+							{% end %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<br />
+				<div class="row">
+					<div class="col">
+						<h2>アカウント情報テーブル(Account Table)</h2>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12">
+						<table class="table table-sm">
+							<thead class="thead-inverse">
+								<tr>
+									<th>#</th>
+									<th>Key</th>
+									<th>AccountID</th>
+									<th>Password</th>
+									<th>LoginStatus</th>
+									<th>LoginKey</th>
 									<th>削除</th>
 								</tr>
 							</thead>
@@ -48,10 +86,110 @@
 							{% for i, data in enumerate(param["lst_account"]) %}
 								<tr>
 									<td>{{ i + 1 }}</td>
-									<td>{{ data.get("user_id", "") }}</td>
+									<td>{{ data.get("_id", "") }}</td>
+									<td>{{ data.get("account_id", "") }}</td>
 									<td>{{ data.get("password", "") }}</td>
-									<td>{{ data.get("status", "") }}</td>
-									<th><button type="button" class="btn btn-outline-success" onClick="document.main.user_id.value = '{{ data.get("user_id", "") }}'; document.main.submit();">削除</button></th>
+									<td>{{ data.get("login_status", "") }}</td>
+									<td>{{ data.get("login_key", "") }}</td>
+									<th><button type="button" class="btn btn-outline-success" onClick="document.main.target_data.value = 'account'; document.main.target_id.value = {{ data.get("_id", "") }}; document.main.submit();">削除</button></th>
+								</tr>
+							{% end %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<br />
+				<div class="row">
+					<div class="col">
+						<h2>キャラクター情報テーブル(Character Table)</h2>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12">
+						<table class="table table-sm">
+							<thead class="thead-inverse">
+								<tr>
+									<th>#</th>
+									<th>Key</th>
+									<th>AccountKey</th>
+									<th>CharacterIndex</th>
+									<th>Name</th>
+									<th>削除</th>
+								</tr>
+							</thead>
+							<tbody>
+							{% for i, data in enumerate(param["lst_character"]) %}
+								<tr>
+									<td>{{ i + 1 }}</td>
+									<td>{{ data.get("_id", "") }}</td>
+									<td>{{ data.get("account_key", "") }}</td>
+									<td>{{ data.get("character_index", "0") }}</td>
+									<td>{{ data.get("name", "") }}</td>
+									<th><button type="button" class="btn btn-outline-success" onClick="document.main.target_data.value = 'character'; document.main.target_id.value = '{{ data.get("_id", "") }}'; document.main.submit();">削除</button></th>
+								</tr>
+							{% end %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<br />
+				<div class="row">
+					<div class="col">
+						<h2>所持アイテム情報テーブル(Have Item Table)</h2>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12">
+						<table class="table table-sm">
+							<thead class="thead-inverse">
+								<tr>
+									<th>#</th>
+									<th>Key</th>
+									<th>CharacterKey</th>
+									<th>ItemKey</th>
+									<th>ItemNum</th>
+									<th>削除</th>
+								</tr>
+							</thead>
+							<tbody>
+							{% for i, data in enumerate(param["tbl_have_item"]) %}
+								<tr>
+									<td>{{ i + 1 }}</td>
+									<td>{{ data.get("_id", "") }}</td>
+									<td>{{ data.get("character_key", "") }}</td>
+									<td>{{ data.get("item_key", "") }}</td>
+									<td>{{ data.get("item_num", "0") }}</td>
+									<th><button type="button" class="btn btn-outline-success" onClick="document.main.target_data.value = 'item'; document.main.target_id.value = '{{ data.get("_id", "") }}'; document.main.submit();">削除</button></th>
+								</tr>
+							{% end %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<br />
+				<div class="row">
+					<div class="col">
+						<h2>アイテム情報マスタ(Item Master)</h2>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12">
+						<table class="table table-sm">
+							<thead class="thead-inverse">
+								<tr>
+									<th>#</th>
+									<th>Key</th>
+									<th>Name</th>
+									<th>削除</th>
+								</tr>
+							</thead>
+							<tbody>
+							{% for i, data in enumerate(param["mst_item"]) %}
+								<tr>
+									<td>{{ i + 1 }}</td>
+									<td>{{ data.get("_id", "") }}</td>
+									<td>{{ data.get("name", "") }}</td>
+									<th><button type="button" class="btn btn-outline-success" onClick="document.main.target_data.value = 'mst_item'; document.main.target_id.value = '{{ data.get("_id", "") }}'; document.main.submit();">削除</button></th>
 								</tr>
 							{% end %}
 							</tbody>
