@@ -5,7 +5,8 @@ using WebSocketSharp;
 [Serializable]
 public class TestMessage
 {
-    public string user_id;
+    public string class_name;
+    public string account_id;
     public string password;
 }
 
@@ -15,7 +16,7 @@ public class TestWebSocket : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        ws = new WebSocket("ws://gkf.iobb.net:8000/login");
+        ws = new WebSocket("ws://gkf.iobb.net:8000/");
 
         ws.OnOpen += (sender, e) =>
         {
@@ -42,18 +43,19 @@ public class TestWebSocket : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKeyUp("s"))
+        if (Input.GetKeyUp("l"))
         {
             TestMessage obj = new TestMessage();
-            obj.user_id = "test";
-            obj.password = "hoge";
+            obj.class_name = "LoginMessage";
+            obj.account_id = "0001";
+            obj.password = "test";
             ws.Send(JsonUtility.ToJson(obj));
         }
         if (Input.GetKeyUp("a"))
         {
             TestMessage obj = new TestMessage();
-            obj.user_id = "test";
-            obj.password = "password";
+            obj.account_id = "0001";
+            obj.password = "test";
             ws.Send(JsonUtility.ToJson(obj));
         }
 

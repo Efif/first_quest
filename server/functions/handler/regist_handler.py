@@ -28,7 +28,8 @@ class RegistHandler(tornado.web.RequestHandler):
 				tbl.insert({
 					"_id": self.get_next_id(),
 					"account_id": param["account_id"],
-					"password": param["password"]
+					"password": param["password"],
+					"login_status": -1
 				})
 				param["account_id"] = ""
 				param["password"] = ""

@@ -58,7 +58,7 @@ db_first_quest
 　　ユニークキー　　　_id　　　int　PK
 　　アカウントID　　　account_id　　　string
 　　パスワード　　　password　　　string
-　　ログイン状態　　　status　　　int
+　　ログイン状態　　　status　　　int　　　※-2：凍結　-1：ログアウト　0：キャラクターセレクト　1～：ログイン中
 　　紐付キー　　　data_key　　　string
 
 　キャラクター情報(tbl_character)

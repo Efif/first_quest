@@ -10,8 +10,6 @@ import tornado.escape
 import tornado.options
 from tornado.options import define, options
 from functions.handler.login_handler import LoginHandler
-from functions.handler.chara_handler import CharaHandler
-from functions.handler.chat_handler import ChatHandler
 from functions.handler.world_handler import WorldHandler
 from functions.handler.regist_handler import RegistHandler
 from functions.handler.control_handler import ControlHandler
@@ -23,10 +21,8 @@ define("db_port", default=27017, type=int)
 class Application(tornado.web.Application):
 	def __init__(self):
 		handlers = [
-			(r'/login', LoginHandler),
-			(r'/chara', CharaHandler),
-			(r'/chat', ChatHandler),
-			(r'/world', WorldHandler),
+			(r'/', LoginHandler),
+			(r'/receive', WorldHandler),
 			(r'/regist', RegistHandler),
 			(r'/control', ControlHandler)
 		]

@@ -79,6 +79,7 @@
 									<th>Password</th>
 									<th>LoginStatus</th>
 									<th>LoginKey</th>
+									<th>凍結</th>
 									<th>削除</th>
 								</tr>
 							</thead>
@@ -91,6 +92,7 @@
 									<td>{{ data.get("password", "") }}</td>
 									<td>{{ data.get("login_status", "") }}</td>
 									<td>{{ data.get("login_key", "") }}</td>
+									<th><button type="button" class="btn btn-outline-success" onClick="document.main.target_data.value = 'lock_account'; document.main.target_id.value = {{ data.get("_id", "") }}; document.main.submit();">切替</button></th>
 									<th><button type="button" class="btn btn-outline-success" onClick="document.main.target_data.value = 'account'; document.main.target_id.value = {{ data.get("_id", "") }}; document.main.submit();">削除</button></th>
 								</tr>
 							{% end %}
@@ -114,6 +116,9 @@
 									<th>AccountKey</th>
 									<th>CharacterIndex</th>
 									<th>Name</th>
+									<th>Sex</th>
+									<th>HP</th>
+									<th>Location(X,Y,Z)</th>
 									<th>削除</th>
 								</tr>
 							</thead>
@@ -125,6 +130,9 @@
 									<td>{{ data.get("account_key", "") }}</td>
 									<td>{{ data.get("character_index", "0") }}</td>
 									<td>{{ data.get("name", "") }}</td>
+									<td>{{ data.get("sex", "") }}</td>
+									<td>{{ data.get("hp", "") }}</td>
+									<td>{{ data.get("x", "") }},{{ data.get("y", "") }},{{ data.get("z", "") }}</td>
 									<th><button type="button" class="btn btn-outline-success" onClick="document.main.target_data.value = 'character'; document.main.target_id.value = '{{ data.get("_id", "") }}'; document.main.submit();">削除</button></th>
 								</tr>
 							{% end %}
