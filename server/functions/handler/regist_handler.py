@@ -45,12 +45,12 @@ class RegistHandler(tornado.web.RequestHandler):
 		self.lock.acquire()
 		tbl = self.db["tbl_count"]
 		result = tbl.find_and_modify(
-			query={"_id": "user_id"}, 
+			query={"_id": "account_id"}, 
 			update={"$inc": {"seq": 1}}
 		)
 		if result is None:
 			tbl.insert({
-				"_id": "user_id",
+				"_id": "account_id",
 				"seq": 1
 			})
 			result = {"seq": 0}
